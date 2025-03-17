@@ -19,9 +19,9 @@ class Handler(BaseHTTPRequestHandler):
         route = urllib.parse.urlparse(self.path)
         match route.path:
             case '/':
-                self.send_html('index.html')
+                self.send_html('templates/index.html')
             case '/message':
-                self.send_html('message.html')
+                self.send_html('templates/message.html')
             case '/read':
                 self.render_template('read.jinja')
             case _:
@@ -29,7 +29,7 @@ class Handler(BaseHTTPRequestHandler):
                 if file.exists():
                     self.send_static(file)
                 else:
-                    self.send_html('error.html', 404)
+                    self.send_html('templates/error.html', 404)
 
     def do_POST(self):
         size = self.headers.get("Content-Length")
